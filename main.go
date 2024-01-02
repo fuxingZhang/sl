@@ -72,13 +72,15 @@ func my_mvaddstr(y, x int, str string) {
 			return
 		}
 	}
-	// for _, char := range str {
-	// 	termbox.SetChar(x, y, char)
-	// 	x++
+
+	// for i, len := 0, len(str); i < len && x < COLS; i, x = i+1, x+1 {
+	// 	// termbox.SetCell(x, y, rune(str[i]), termbox.ColorDefault, termbox.ColorDefault)
+	// 	termbox.SetChar(x, y, rune(str[i]))
 	// }
-	for i, len := 0, len(str); i < len && x < COLS; i, x = i+1, x+1 {
-		// termbox.SetCell(x, y, rune(str[i]), termbox.ColorDefault, termbox.ColorDefault)
-		termbox.SetChar(x, y, rune(str[i]))
+
+	for _, char := range str {
+		termbox.SetChar(x, y, char)
+		x++
 	}
 }
 
