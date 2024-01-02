@@ -28,20 +28,19 @@ func main() {
 
 	COLS, LINES = termbox.Size()
 	args := os.Args[1:]
-	var x int
 
-	for i := 1; i < len(args); i++ {
-		if args[i][0] == '-' {
-			option(args[i][1:])
+	for _, arg := range args {
+		if arg[0] == '-' {
+			option(arg[1:])
 		}
 	}
 
-	// 不起作用，应该是库内部处理了
+	// Didn't work, the library internally handled
 	// signal.Ignore(os.Interrupt)
 
 	termbox.HideCursor()
 
-	for x = COLS - 1; ; x-- {
+	for x := COLS - 1; ; x-- {
 		if LOGO == 1 {
 			if add_sl(x) == ERR {
 				break
@@ -65,15 +64,21 @@ func main() {
 }
 
 func my_mvaddstr(y, x int, str string) {
-	for ; x < 0; x++ {
-		str = str[1:]
+	// if y < 0 {
+	// 	return
+	// }
+	for ; x < 0; x, str = x+1, str[1:] {
 		if len(str) == 0 {
 			return
 		}
 	}
-	for _, char := range str {
-		termbox.SetCell(x, y, char, termbox.ColorDefault, termbox.ColorDefault)
-		x++
+	// for _, char := range str {
+	// 	termbox.SetChar(x, y, char)
+	// 	x++
+	// }
+	for i, len := 0, len(str); i < len && x < COLS; i, x = i+1, x+1 {
+		// termbox.SetCell(x, y, rune(str[i]), termbox.ColorDefault, termbox.ColorDefault)
+		termbox.SetChar(x, y, rune(str[i]))
 	}
 }
 
