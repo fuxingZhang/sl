@@ -48,7 +48,7 @@ func main() {
 		}
 	}
 
-	// 不起作用，应该是库内部处理了
+	// Didn't work, the library internally handled
 	// signal.Ignore(os.Interrupt)
 
 	s.HideCursor()
