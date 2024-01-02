@@ -40,11 +40,10 @@ func main() {
 
 	COLS, LINES = s.Size()
 	args := os.Args[1:]
-	var x int
 
-	for i := 1; i < len(args); i++ {
-		if args[i][0] == '-' {
-			option(args[i][1:])
+	for _, arg := range args {
+		if arg[0] == '-' {
+			option(arg[1:])
 		}
 	}
 
@@ -53,7 +52,7 @@ func main() {
 
 	s.HideCursor()
 
-	for x = COLS - 1; ; x-- {
+	for x := COLS - 1; ; x-- {
 		if LOGO == 1 {
 			if add_sl(x) == ERR {
 				break
@@ -77,8 +76,10 @@ func main() {
 }
 
 func my_mvaddstr(y, x int, str string) {
-	for ; x < 0; x++ {
-		str = str[1:]
+	// if y < 0 {
+	// 	return
+	// }
+	for ; x < 0; x, str = x+1, str[1:] {
 		if len(str) == 0 {
 			return
 		}
