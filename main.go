@@ -84,6 +84,12 @@ func my_mvaddstr(y, x int, str string) {
 			return
 		}
 	}
+
+	// for i, len := 0, len(str); i < len && x < COLS; i, x = i+1, x+1 {
+	// 	// s.SetCell(x, y, tcell.StyleDefault, rune(str[i]))
+	// 	s.SetContent(x, y, rune(str[i]), nil, tcell.StyleDefault)
+	// }
+
 	for _, char := range str {
 		// s.SetCell(x, y, tcell.StyleDefault, char)
 		s.SetContent(x, y, char, nil, tcell.StyleDefault)
